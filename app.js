@@ -1,10 +1,27 @@
-// Тоглогчийн ээлжийг хадгалаХ хувьсагч, нэгдүгээр тоглогчийг 0, хоёрдугаар тоглогчийг 1 гэж тэмдэглэнэ. 
-var activePlayer = 0;
+// Тоглоомын бүх газарт ашиглагдах глобаль хувьсагчдыг энд зарлая
+
+//  Аль тоглогч шоо шидэх вэ гэдгийг хадагална.
+var activePlayer;
+
+// Хоёр тоглогчийн цуглуулсан оноонууд
+var scores;
+
+// Идэвхтэй тоглогчийн цуглуулж байгаа ээлжийн оноо
+var roundScore;
+
+// Шооны зургийг үзүүлэх элэментийг DOM-оос хайж олоод энд  хадгална.
+var diceDom = document.querySelector(".dice");
+// Тоглоомыг эхлүүлнэ.
+initGame();
+
+// Тоглоом эхлэхэд бэлтгэж эхлэнэ.
+function initGame() {
+    // Тоглогчийн ээлжийг хадгалаХ хувьсагч, нэгдүгээр тоглогчийг 0, хоёрдугаар тоглогчийг 1 гэж тэмдэглэнэ. 
+activePlayer = 0;
 // Тоглогчдын цуглуулсан оноог хадгалах хувьсагч
-var scores = [0, 0];
+scores = [0, 0];
 // Тоглогчийн ээлжиндээ цуглуулж байгаа оноог хадгалах хувьсагч
-var roundScore = 0;
-// Шооны аль талаараа буусныг хадгалах хувьсагч хэрэгтэй, 1-6 гэсэн утгыг энэ хувьсагчид санамсаргүйгээр үүсгэж өгнө.
+roundScore = 0;
 
 // Программ эхлэхэд бэлтгэе
 
@@ -12,8 +29,22 @@ document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
-var diceDom = document.querySelector(".dice");
+
+// Тоглогчдын нэрийг буцааж гаргах
+document.getElementById("name-0").textContent = "Player 1";
+document.getElementById("name-1").textContent = "Player 2";
+
+document.querySelector('.player-0-panel').classList.remove('winner');
+document.querySelector('.player-1-panel').classList.remove('winner');
+
+document.querySelector('.player-0-panel').classList.remove('active');
+document.querySelector('.player-1-panel').classList.remove('active');
+
+document.querySelector('.player-0-panel').classList.add('active');
+
 diceDom.style.display = "none";
+
+} 
 // Шоог шидэх эвэнт листнер
 
 document.querySelector(".btn-roll").addEventListener("click", function(){
@@ -41,12 +72,6 @@ document.querySelector(".btn-roll").addEventListener("click", function(){
 });
 // HOLD товчны эвэнт листнер
 document.querySelector(".btn-hold").addEventListener("click", function(){
-    // Уг тоглогчийн цуглуулсан ээлжийн оноог глобаль оноон дээр нэмж өгнө.
-    // if(activePlayer === 0 ) {
-    //     scores[0] = scores[0] + roundScore;
-    // }else{
-    //     scores[1] = [scores1] + roundScore; 
-    // }
 scores[activePlayer] = scores[activePlayer] + roundScore;
 // Delgets deer onoog n oorchilno
 document.getElementById('score-' + activePlayer).textContent = scores[activePlayer]
@@ -78,8 +103,4 @@ function switchToNextPlayer(){
 
 }
 // Шинэ тоглоом эхлүүлэх товчний эвэнт листенер
-document.querySelector(".btn-new").addEventListeneri('click', function(){
- 
-});
-
-
+document.querySelector(".btn-new").addEventListener('click', initGame);
