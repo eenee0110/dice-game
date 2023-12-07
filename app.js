@@ -91,7 +91,7 @@ document.getElementById('score-' + activePlayer).textContent = scores[activePlay
     roundScore = 0;
     document.getElementById("current-" + activePlayer).textContent = 0;
 // Уг тоглогч хожсон эсэхийг (оноо нь 100-с их эсэх) шалгах
-if (scores[activePlayer] >= 100) {
+if (scores[activePlayer] >= 10) {
     isNewGame = false;
     // Ялагч гэсэн текстийг нэрнйих нь оронд гаргана
     document.getElementById("name-" + activePlayer ).textContent = "WINNER!!!";
